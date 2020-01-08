@@ -10,12 +10,12 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  el=document.querySelector("btn-login");
+  el=document.querySelector('#btn-login');
    
   if(el){
       el.addEventListener("click",function(){
-         var email=  document.getElementById("email").val();
-         var password=  document.getElementById("password").val();
+         var email=  document.querySelector("#email").value;
+         var password=  document.querySelector("#password").value;
          console.log("login successful!");
          firebase.auth.Auth.Persistence.LOCAL;
 
@@ -37,7 +37,9 @@ var firebaseConfig = {
          else{
              window.alert("Please fill out all fields!");
          }
-   
+        
+
+
         });}
 
         

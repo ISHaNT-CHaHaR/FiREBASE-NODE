@@ -6,10 +6,7 @@
             </title>
            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-            <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+            
 
            <link rel="stylesheet" href="design_files/css/style.css">
            <link rel="stylesheet" href="design_files/fonts/material-design-iconic-font/css/material-design-iconic-font.css">
@@ -73,10 +70,13 @@
            
             
             </div>
-            <script src="index.js"></script>
+            <script src="js/index.js"></script>
             <script>
                 firebase.auth().onAuthStateChanged(function(user){
-                if(user){
+                     console.log(user);  
+                     firebase.auth().signOut();              
+                    if(user){
+
                     window.location.href="home.html";
                 }
                 });
