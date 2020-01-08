@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        ok!
+        <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+           <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+           <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+           <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-storage.js"></script>    
+    </head>
+    <body>
+        <h1>
+            Congo! u logged!    
+        </h1>
+
+
+        <script src="js/index.js"></script>
+        <script>
+        firebase.auth().onAuthStateChanged(function(user){
+          if(user){
+              window.location.href="signin.html";
+          }
+        });
+        </script>
+    </body>
+</html>
