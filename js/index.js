@@ -10,11 +10,13 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  
-   $("#btn-login").click(function(){
-         var email= $("#email").val();
-         var password= $("#password").val();
-         
+  el=document.querySelector("btn-login");
+   
+  if(el){
+      el.addEventListener("click",function(){
+         var email=  document.getElementById("email").val();
+         var password=  document.getElementById("password").val();
+         console.log("login successful!");
          firebase.auth.Auth.Persistence.LOCAL;
 
          if(email!="" && password!= "")
@@ -36,4 +38,6 @@ var firebaseConfig = {
              window.alert("Please fill out all fields!");
          }
    
-        });
+        });}
+
+        
