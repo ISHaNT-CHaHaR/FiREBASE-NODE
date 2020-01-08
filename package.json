@@ -1,0 +1,19 @@
+{
+  "name": "firebase-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ISHaNT-CHaHaR/FiREBASE-NODE.git"
+  },
+  "author": "Ishant chahar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ISHaNT-CHaHaR/FiREBASE-NODE/issues"
+  },
+  "homepage": "https://github.com/ISHaNT-CHaHaR/FiREBASE-NODE#readme"
+}
