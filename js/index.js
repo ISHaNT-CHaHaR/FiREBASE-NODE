@@ -99,4 +99,40 @@ var firebaseConfig = {
             
                     });}
 
-        
+
+
+
+   var f=document.querySelector("#btn-resetPassword")  ;
+   
+   if(f){
+       f.addEventListener("click",()=>{
+            var auth=firebase.auth();
+            var email= document.querySelector("#email").value;
+
+            if(email!=""){
+                auth.sendPasswordResetEmail(email).then(()=> {
+                    window.alert(`We have sent an Email to You, Please check and Verify  `); 
+                    
+
+
+                })
+                .catch((error)=>
+                { 
+                    var errorcode=error.code;
+                    var errormessage=error.message;
+                    window.alert(`Message:${errormessage}\n Code:${errorcode}`);
+
+                    
+
+                });
+
+            }
+            else{
+                  window.alert("Please fill up your email id");
+            }
+
+
+
+
+       });
+   }
