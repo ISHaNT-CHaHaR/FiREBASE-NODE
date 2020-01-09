@@ -51,4 +51,49 @@ var firebaseConfig = {
       
       
               });}
+
+
+
+
+
+              var el=document.querySelector('#btn-signup');
+   
+              if(el){
+                  el.addEventListener("click",()=>{
+                     var email=  document.querySelector("#email").value;
+                     var password=  document.querySelector("#password").value;
+                     var cpassword=  document.querySelector("#confirmPassword").value;
+                     console.log("login successful!");
+                     firebase.auth.Auth.Persistence.LOCAL;
+            
+                     if(email!="" && password!= ""&& cpassword!="")
+                     {
+                             if(password===cpassword) {
+                        var result = firebase.auth().createUserWithEmailAndPassword(email,password);
+                              result.catch(function(error){
+                                  var errorCode= error.code;
+                                  var errorMessage= error.message;
+                                  
+                                  console.log(errorCode);
+                                  console.log(errorMessage);
+            
+                                  window.alert("Message : " + errorMessage);
+            
+            
+                              } );}
+                              else{
+                                  window.alert("Passwords does not match! Please Try again!");
+                                document.querySelector("#password").textContent=null;
+                                document.querySelector("#confirmPassword").textContent=null;
+                                      console.log("done!");
+                              }
+                     }
+                     else{
+                         window.alert("Please fill out all fields!");
+                     }
+                    
+            
+            
+                    });}
+
         
