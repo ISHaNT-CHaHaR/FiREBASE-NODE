@@ -66,27 +66,30 @@ var firebaseConfig = {
                      console.log("login successful!");
                      firebase.auth.Auth.Persistence.LOCAL;
             
-                     if(email!="" && password!= ""&& cpassword!="")
+                     if(email!="" && password!= "" && cpassword!="")
                      {
-                             if(password===cpassword) {
-                        var result = firebase.auth().createUserWithEmailAndPassword(email,password);
-                              result.catch(function(error){
-                                  var errorCode= error.code;
-                                  var errorMessage= error.message;
-                                  
-                                  console.log(errorCode);
-                                  console.log(errorMessage);
-            
-                                  window.alert("Message : " + errorMessage);
-            
-            
-                              } );}
-                              else{
-                                  window.alert("Passwords does not match! Please Try again!");
-                                document.querySelector("#password").textContent=null;
-                                document.querySelector("#confirmPassword").textContent=null;
-                                      console.log("done!");
-                              }
+                        
+                            if(password===cpassword) {
+                                var result = firebase.auth().createUserWithEmailAndPassword(email,password);
+                                      
+                                
+                                result.catch(function(error){
+                                          var errorCode= error.code;
+                                          var errorMessage= error.message;
+                                          
+                                          console.log(errorCode);
+                                          console.log(errorMessage);
+                    
+                                          window.alert("Message : " + errorMessage);
+                    
+                    
+                                      } );}
+                                      else{
+                                          window.alert("Passwords does not match! Please Try again!");
+                                        
+                                              console.log("done!");
+                                      }
+                        
                      }
                      else{
                          window.alert("Please fill out all fields!");
