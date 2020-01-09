@@ -10,36 +10,45 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  el=document.querySelector('#btn-login');
+  var e=document.querySelector('#btn-logout');
    
-  if(el){
-      el.addEventListener("click",function(){
-         var email=  document.querySelector("#email").value;
-         var password=  document.querySelector("#password").value;
-         console.log("login successful!");
-         firebase.auth.Auth.Persistence.LOCAL;
-
-         if(email!="" && password!= "")
-         {
-                  var result = firebase.auth().signInWithEmailAndPassword(email,password);
-                  result.catch(function(error){
-                      var errorCode= error.code;
-                      var errorMessage= error.message;
-                      
-                      console.log(errorCode);
-                      console.log(errorMessage);
-
-                      window.alert("Message : " + errorMessage);
-
-
-                  } );
-         }
-         else{
-             window.alert("Please fill out all fields!");
-         }
-        
-
-
+  if(e){
+      e.addEventListener("click",()=>{
+        firebase.auth().signOut();
         });}
 
+
+
+
+        var el=document.querySelector('#btn-login');
+   
+        if(el){
+            el.addEventListener("click",()=>{
+               var email=  document.querySelector("#email").value;
+               var password=  document.querySelector("#password").value;
+               console.log("login successful!");
+               firebase.auth.Auth.Persistence.LOCAL;
+      
+               if(email!="" && password!= "")
+               {
+                        var result = firebase.auth().signInWithEmailAndPassword(email,password);
+                        result.catch(function(error){
+                            var errorCode= error.code;
+                            var errorMessage= error.message;
+                            
+                            console.log(errorCode);
+                            console.log(errorMessage);
+      
+                            window.alert("Message : " + errorMessage);
+      
+      
+                        } );
+               }
+               else{
+                   window.alert("Please fill out all fields!");
+               }
+              
+      
+      
+              });}
         
