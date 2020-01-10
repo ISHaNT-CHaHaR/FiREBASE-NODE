@@ -86,8 +86,8 @@ var firebaseConfig = {
                                       } );}
                                       else{
                                           window.alert("Passwords does not match! Please Try again!");
-                                        
-                                              console.log("done!");
+                                      
+                                              
                                       }
                         
                      }
