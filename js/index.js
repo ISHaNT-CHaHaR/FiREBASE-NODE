@@ -10,16 +10,23 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+
+
+  ///////////////////for LOGGING OUT/////////////////////////////////////////////
+
+
+
   var e=document.querySelector('#btn-logout');
    
   if(e){
       e.addEventListener("click",()=>{
-        firebase.auth().signOut();
+        firebase.auth().signOut();/////////////////signout the user!
         });}
 
 
 
-
+//////////////////////////////FOR USER LOGIN///////////////////////////////////
         var el=document.querySelector('#btn-login');
    
         if(el){
@@ -27,12 +34,12 @@ var firebaseConfig = {
                var email=  document.querySelector("#email").value;
                var password=  document.querySelector("#password").value;
                console.log("login successful!");
-               firebase.auth.Auth.Persistence.LOCAL;
+               firebase.auth.Auth.Persistence.LOCAL;/// for staying in login mode even after closing app!
       
                if(email!="" && password!= "")
                {
-                        var result = firebase.auth().signInWithEmailAndPassword(email,password);
-                        result.catch(function(error){
+                        var result = firebase.auth().signInWithEmailAndPassword(email,password);///for signing in!
+                        result.catch(function(error){/////JS promise!
                             var errorCode= error.code;
                             var errorMessage= error.message;
                             
@@ -45,7 +52,7 @@ var firebaseConfig = {
                         } );
                }
                else{
-                   window.alert("Please fill out all fields!");
+                   window.alert("Please fill out all fields!");////alert messages!
                }
               
       
@@ -55,7 +62,7 @@ var firebaseConfig = {
 
 
 
-
+/////////////////////////////////////Signing up////////////////////////////////
               var el=document.querySelector('#btn-signup');
    
               if(el){
@@ -70,11 +77,11 @@ var firebaseConfig = {
                      {
                         
                             if(password===cpassword) {
-                                var result = firebase.auth().createUserWithEmailAndPassword(email,password);
+                                var result = firebase.auth().createUserWithEmailAndPassword(email,password);//////for creating NEW USer!
                                       
                                 
                                 result.catch(function(error){
-                                           var errorCode= error.code;
+                                           var errorCode= error.code;//////error message and code that generates!
                                           var errorMessage= error.message;
                                           
                                           console.log(errorCode);
@@ -101,8 +108,10 @@ var firebaseConfig = {
 
 
 
+//////////////////////////////////for password reset///////////////////////
+   
 
-   var f=document.querySelector("#btn-resetPassword")  ;
+var f=document.querySelector("#btn-resetPassword")  ;
    
    if(f){
        f.addEventListener("click",()=>{
@@ -110,7 +119,7 @@ var firebaseConfig = {
             var email= document.querySelector("#email").value;
 
             if(email!=""){
-                auth.sendPasswordResetEmail(email).then(()=> {
+                auth.sendPasswordResetEmail(email).then(()=> {/////Send email to user....then promise!
                     window.alert(`We have sent an Email to You, Please check and Verify  `); 
                     
 
@@ -138,6 +147,11 @@ var firebaseConfig = {
    }
 
 
+
+
+//////////////////////////////for UPgrading ACcount setting!///////////////////////////
+
+
 var enter=document.querySelector("#btn-update");
 
 if(enter){
@@ -149,9 +163,9 @@ if(enter){
              var country=document.querySelector("#country").value;
              var gender=document.querySelector("#gender").value;
              var bio=document.querySelector("#bio").value;
-             var rootRef=firebase.database().ref().child("Users");
-            var userID = firebase.auth().currentUser.uid;
-            var usersRef = rootRef.child(userID);
+             var rootRef=firebase.database().ref().child("Users");/////makes a new child!
+            var userID = firebase.auth().currentUser.uid;/// makes a new user key  by taking from authentication!
+            var usersRef = rootRef.child(userID);//// selects the child by useer ID
 
             if(fName!="" && sName!="" && phone!="")
       {
@@ -165,7 +179,7 @@ if(enter){
                      "country":country
 
                };
-                   usersRef.set(userData,(error)=>{
+                   usersRef.set(userData,(error)=>{////take the object to realtime database!
                        if(error){
                            var errorcode=error.code;
                            var errormessage=error.message;
@@ -185,11 +199,6 @@ if(enter){
           window.alert("Form is incomplete. Please fill out all the details!");
 
       }
-
-
-
-
-
 });}
 
 

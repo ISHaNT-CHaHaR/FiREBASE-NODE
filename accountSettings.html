@@ -103,16 +103,16 @@
             </div>
             <script src="js/index.js"></script>
             <script>
-                firebase.auth().onAuthStateChanged(function(user){
-                     console.log(user);  
+                firebase.auth().onAuthStateChanged(function(user){////eecute when state changes!
+                      
                                  
                      if(user){
                         
-                        var userID=firebase.auth().currentUser.uid;
+                        var userID=firebase.auth().currentUser.uid;///takin userID 
                     
                     
-                    firebase.database().ref('Users/'+ userID).once('value').then((snapshot)=>{
-                        if(snapshot.value){
+                    firebase.database().ref('Users/'+ userID).once('value').then((snapshot)=>{///gave reference of real user once and then returned a promise.
+                        if(snapshot.value){////snapshot is value of object! maybe
                             window.location.href="MainPage.html";
                         }
                       
