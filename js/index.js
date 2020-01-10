@@ -138,8 +138,10 @@ var firebaseConfig = {
    }
 
 
+var enter=document.querySelector("#btn-update");
 
-document.querySelector("#btn-update").addEventListener("click",()=>{
+if(enter){
+         enter.addEventListener("click",()=>{
              var phone=document.querySelector("#phone").value;
              var address=document.querySelector("#address").value;
              var fName=document.querySelector("#firstName").value;
@@ -148,10 +150,10 @@ document.querySelector("#btn-update").addEventListener("click",()=>{
              var gender=document.querySelector("#gender").value;
              var bio=document.querySelector("#bio").value;
              var rootRef=firebase.database().ref().child("Users");
-            var userID=firebase.auth().currentUser.uid;
-            var usersRef=rootRef.child(userID);
+            var userID = firebase.auth().currentUser.uid;
+            var usersRef = rootRef.child(userID);
 
-            if(fName!="" && sName!="" && phone!="" && country!="" &&gender!="" && bio!="")
+            if(fName!="" && sName!="" && phone!="")
       {
                var userData= {
                      "phone":phone,
@@ -188,7 +190,7 @@ document.querySelector("#btn-update").addEventListener("click",()=>{
 
 
 
-});
+});}
 
 
 

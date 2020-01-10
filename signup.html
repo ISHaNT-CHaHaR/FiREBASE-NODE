@@ -75,10 +75,10 @@
                      console.log(user);  
                                  
                     if(user){
-                    var userID=firebase.auth().current.uid;
+                    var userID=firebase.auth().currentUser.uid;
                     
                     
-                    firebase.database.ref('Users/'+ userID).once.value.then((snapshot)=>{
+                    firebase.database().ref('Users/'+ userID).once('value').then((snapshot)=>{
                         if(snapshot.value){
                             window.location.href="MainPage.html";
                         }
