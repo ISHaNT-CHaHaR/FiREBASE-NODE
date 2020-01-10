@@ -136,3 +136,59 @@ var firebaseConfig = {
 
        });
    }
+
+
+
+document.querySelector("#btn-update").addEventListener("click",()=>{
+             var phone=document.querySelector("#phone").value;
+             var address=document.querySelector("#address").value;
+             var fName=document.querySelector("#firstName").value;
+             var sName=document.querySelector("#secondName").value;
+             var country=document.querySelector("#country").value;
+             var gender=document.querySelector("#gender").value;
+             var bio=document.querySelector("#bio").value;
+             var rootRef=firebase.database().ref().child("Users");
+            var userID=firebase.auth().currentUser.uid;
+            var usersRef=rootRef.child(userID);
+
+            if(fName!="" && sName!="" && phone!="" && country!="" &&gender!="" && bio!="")
+      {
+               var userData= {
+                     "phone":phone,
+                     "address":address,
+                     "bio":bio,
+                     "firstName":fName,
+                     "secondName": sName,
+                     "gender":gender,
+                     "country":country
+
+               };
+                   usersRef.set(userData,(error)=>{
+                       if(error){
+                           var errorcode=error.code;
+                           var errormessage=error.message;
+                           console.log(errorcode);
+                           console.log(errormessage);
+                           window.alert(`Message:${errormessage}`);
+
+                       }
+                       else{
+                       window.location.href="MainPage.html";
+   
+                       }
+                   });
+
+            }
+      else{
+          window.alert("Form is incomplete. Please fill out all the details!");
+
+      }
+
+
+
+
+
+});
+
+
+
