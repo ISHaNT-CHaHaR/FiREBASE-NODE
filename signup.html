@@ -75,7 +75,13 @@
                      console.log(user);  
                                  
                     if(user){
+                    var userID=firebase.auth().current.uid;
+                    
+                    
+                    firebase.database.ref('Users/'+ userID).once.value.then((snapshot)=>{
+                        
 
+                    });
                     window.location.href="MainPage.html";
                 }
                 });
