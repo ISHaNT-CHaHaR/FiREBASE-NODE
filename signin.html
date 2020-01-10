@@ -77,9 +77,20 @@
                                 
                     if(user){
                         
-                    window.location.href="MainPage.html";
-                }
+                        var userID=firebase.auth().current.uid;
+                    
+                    
+                    firebase.database.ref('Users/'+ userID).once.value.then((snapshot)=>{
+                        if(snapshot.value){
+                            window.location.href="MainPage.html";
+                        }
+                      else{
+                          window.location.href="accountSettings.html"
+                      }
+               
                 });
+            }
+        });
             </script>
               
                 

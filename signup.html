@@ -79,10 +79,15 @@
                     
                     
                     firebase.database.ref('Users/'+ userID).once.value.then((snapshot)=>{
-                        
+                        if(snapshot.value){
+                            window.location.href="MainPage.html";
+                        }
+                      else{
+                          window.location.href="accountSettings.html"
+                      }
 
                     });
-                    window.location.href="MainPage.html";
+                   
                 }
                 });
             </script>
