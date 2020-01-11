@@ -113,7 +113,7 @@
                             <!------POST AREA-->  
                 
                         </div>
-
+<section>
                     <hr><br><br><br>
                     <div class="text-center bg-light text-dark">
                         <h3>All New BLOGS</h3>
@@ -130,7 +130,7 @@
 
                     </div>
                         <br>
-
+</section>
 
                         <!--     validation            -->
                            <script>  
@@ -139,12 +139,17 @@
 
                              function previewImage(image_blog){
                                  var reader=new FileReader();
+
                                  reader.onload = function(e){
                                      $("#selected-image").attr('src',e.target.result);
                                      $("#selected-image").fadeIn();
                                  }
                                    reader.readAsDataURL(image_blog.files[0]);
                                 }
+                                
+
+
+                   
 
                                 $("#main-image").change(function(){
                                           previewImage(this);
@@ -186,6 +191,7 @@
             }
             });
         </script>
+        
     </body>
 </html>
 <style>
@@ -194,6 +200,11 @@ body{
 }
 
 h3{
-    margin:auto;
+
+    display: block;
+    text-align: center;
 }
+
+
+
 </style>
