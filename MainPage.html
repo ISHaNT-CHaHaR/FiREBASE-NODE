@@ -186,14 +186,14 @@
                                 var databaseRef = firebase.database().ref().child("Blogs");
 
                             databaseRef.once("value").then((snapshot)=>{
-                                var name = picture["name"];
+                                var name = picture_blog["name"];
                                 var dateStr = new Date().getTime();
                                 var fileCompleteName = name +  "_" + dateStr;
                                 
                                 var storageRef = firebase.storage().ref("Blog Images");
                                 var blogStorageRef =  storageRef.child(fileCompleteName);
 
-                                var uploadTask = blogStorageRef.put(picture);
+                                var uploadTask = blogStorageRef.put(picture_blog);
                                 
                                 uploadTask.on("state_changed", 
                                 
@@ -224,16 +224,16 @@
                                             month: "long",
                                             day: "2-digit",
                                             year: "numeric" 
-                                        }
+                                        };
 
-                                   var blogdata = {
+                                   var blogData = {
                                        "image": downloadUrl,
                                        "name": fileCompleteName,
                                         "desc": desc,
-                                        "uid": uid,
+                                        "uid": user.uid,
                                          "name": userName,
-                                         "time": time.tolocaleString('en-US',{hour: 'numeric', minute:'numeric',hour12: true}),
-                                         "date": time.tolocaleDateString('en-US',options),
+                                         "time": time.toLocaleString('en-US',{hour: 'numeric', minute:'numeric',hour12: true}),
+                                         "date": time.toLocaleDateString('en-US',options),
                                    };
 
                                    var newPostRef =  databaseRef.push();
