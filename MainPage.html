@@ -186,11 +186,11 @@
                                 var databaseRef = firebase.database().ref().child("Blogs");
 
                             databaseRef.once("value").then((snapshot)=>{
-                                var name=picture["name"];
-                                var dateStr=Date().getTime();
+                                var name = picture["name"];
+                                var dateStr = new Date().getTime();
                                 var fileCompleteName = name +  "_" + dateStr;
                                 
-                                var storageRef = firebase.storage().ref().child("Blog Images");
+                                var storageRef = firebase.storage().ref("Blog Images");
                                 var blogStorageRef =  storageRef.child(fileCompleteName);
 
                                 var uploadTask = blogStorageRef.put(picture);
@@ -216,7 +216,7 @@
                                      userName  = fName+ " "+ sName;
 
                                         });
-                                    uploadTask.snapshot.getDownloadURL().then((downloadUrl)=>{
+                                    uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl)=>{
                                         var time = new Date();
                                         
                                         var options = {
@@ -236,7 +236,7 @@
                                          "date": time.tolocaleDateString('en-US',options),
                                    };
 
-                                   var newPostRef =  database.push();
+                                   var newPostRef =  databaseRef.push();
 
                                    newPostRef.set(blogData, (err)=>{
                                           if(err){
@@ -267,7 +267,14 @@
 
 
     function resetForm()
+          {
+              $("#main-form")[0].reset();  
+              $("#selected-image")[0].fadeOut(); 
+              $("#upload-progress")[0].html("Completed!"); 
+              
 
+
+          }
 
 
         //UPLOADING TO FIREBASE DATABASE AND TO STORAGE///////////////////             
