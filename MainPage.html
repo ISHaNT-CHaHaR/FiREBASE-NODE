@@ -71,6 +71,9 @@
                        
                         <!------POST AREA-->  
                          <div class="jumbotron bg-dark" style="margin-top:15px;">
+                            <script>
+                                 var counter=0;
+                                </script>
                            <div class="container text-center"></div>
                             <form id="main-form">
                                  <div class="form-group">
@@ -139,7 +142,7 @@
 
                              function previewImage(image_blog){
                                  var reader=new FileReader();
-
+ 
                                  reader.onload = function(e){
                                      $("#selected-image").attr('src',e.target.result);
                                      $("#selected-image").fadeIn();
@@ -175,9 +178,115 @@
                                 $("#main-image").addClass("is-invalid");
                                   return;  
                                }
+
+
+                    
+
+        //UPLOADING TO FIREBASE DATABASE AND TO STORAGE///////////////////
+                                var databaseRef = firebase.database().ref().child("Blogs");
+
+                            databaseRef.once("value").then((snapshot)=>{
+                                var name=picture["name"];
+                                var dateStr=Date().getTime();
+                                var fileCompleteName = name +  "_" + dateStr;
+                                
+                                var storageRef = firebase.storage().ref().child("Blog Images");
+                                var blogStorageRef =  storageRef.child(fileCompleteName);
+
+                                var uploadTask = blogStorageRef.put(picture);
+                                
+                                uploadTask.on("state_changed", 
+                                
+                                 function progress(snapshot){
+                                     var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+                                     $("upload-progress").html(Math.round(percentage) + "%");
+                                     $("upload-progress").attr("style", "width" + percentage +"%");
+
+                                 },
+                                 function error(err){
+                                     window.alert(`Not uploaded successfully`);
+
+                                 },
+                                 function complete(){
+                                var user= firebase.auth().currentUser;
+                                var userName = firebase.database().ref("Users/"+ user.uid).once('value').then(()=>{
+                                     var fName = (snapshot.value && snapshot.value.firstName);
+                                     var sName = (snapshot.value && snapshot.value.secondName);
+                                        
+                                     userName  = fName+ " "+ sName;
+
+                                        });
+                                    uploadTask.snapshot.getDownloadURL().then((downloadUrl)=>{
+                                        var time = new Date();
+                                        
+                                        var options = {
+                                            weekday: "long",
+                                            month: "long",
+                                            day: "2-digit",
+                                            year: "numeric" 
+                                        }
+
+                                   var blogdata = {
+                                       "image": downloadUrl,
+                                       "name": fileCompleteName,
+                                        "desc": desc,
+                                        "uid": uid,
+                                         "name": userName,
+                                         "time": time.tolocaleString('en-US',{hour: 'numeric', minute:'numeric',hour12: true}),
+                                         "date": time.tolocaleDateString('en-US',options),
+                                   };
+
+                                   var newPostRef =  database.push();
+
+                                   newPostRef.set(blogData, (err)=>{
+                                          if(err){
+                                              $("#result").attr("class", "alert alert-danger");
+                                              $("#result").html(err.message);
+
+                                          }
+                                          else{
+                                            $("#result").attr("class", "alert alert-success");
+                                            $("#result").html("blog has been uploaded successfully");
+
+
+                                            window.open("","_self");
+                                          }
+                                   });
+
+                                 
+
+
+
+                                    });
+                                 }
+                                
+                                );
+                
+
+        }); 
+
+
+    function resetForm()
+
+
+
+        //UPLOADING TO FIREBASE DATABASE AND TO STORAGE///////////////////             
+
+
+
+            
                             });
 
-                           </script>                  
+
+
+
+
+
+
+
+
+
+                             </script>                  
            </div>
 
 
