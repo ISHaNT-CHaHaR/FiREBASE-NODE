@@ -189,7 +189,7 @@
                                 var name = picture_blog["name"];
                                 var dateStr = new Date().getTime();
                                 var fileCompleteName = name +  "_" + dateStr;
-                                
+                                console.log(snapshot);
                                 var storageRef = firebase.storage().ref("Blog Images");
                                 var blogStorageRef =  storageRef.child(fileCompleteName);
 
@@ -211,10 +211,9 @@
                                 var user= firebase.auth().currentUser;
                                 var userName = firebase.database().ref("Users/"+ user.uid).once('value').then(()=>{
                                      var fName = (snapshot.value && snapshot.value.firstName);
-                                     var sName = (snapshot.value && snapshot.value.secondName);
-                                        
-                                     userName  = fName+ " "+ sName;
-
+                                     console.log(snapshot);
+                                     var sName = (snapshot.value && snapshot.value.secondName);                      
+                                     userName  = fName + " " + sName;
                                         });
                                     uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl)=>{
                                         var time = new Date();
@@ -235,7 +234,6 @@
                                          "time": time.toLocaleString('en-US',{hour: 'numeric', minute:'numeric',hour12: true}),
                                          "date": time.toLocaleDateString('en-US',options),
                                    };
-
                                    var newPostRef =  databaseRef.push();
 
                                    newPostRef.set(blogData, (err)=>{
@@ -247,8 +245,7 @@
                                           else{
                                             $("#result").attr("class", "alert alert-success");
                                             $("#result").html("blog has been uploaded successfully");
-
-
+                                               window.location.reload(true);
                                             window.open("","_self");
                                           }
                                    });
