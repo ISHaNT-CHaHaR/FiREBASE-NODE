@@ -201,3 +201,50 @@ if(enter){
 
       }
 });}
+
+
+
+var  dbBlogs = firebase.database().ref().child("Blogs").orderByChild("counter");
+
+      dbBlogs.on("value",(blogs)=>{
+           if(blogs.exists()){
+                 var blogsHtml = "";
+                 blogs.forEach(function(singleBlog){
+                     counter = counter+1;
+
+                    blogsHtml+="<div class= 'jumbotron bg-light text-dark border border-dark'>";
+                      
+                      blogsHtml  += "<div> <img width='805' height='450' src='/>";
+                           blogsHtml+= singleBlog.val().image;   
+                      blogsHtml+="'</div> <br>";
+                      
+                      blogsHtml  += "<div class='row'>";
+
+                            blogsHtml += "<div class='col-sm-5'> <p style='color: grey;>"
+                                          + "Published by: "+ singleBlog.val().userName;
+                                          + "</p>  </div>" 
+                                          + "<div class='col-sm-3'> <p style='color: grey;>"
+                                          + "Time : "+ singleBlog.val().time;
+                                          + "</p>  </div>"
+                                          "<div class='col-sm-4 '> <p style='color: grey;>"
+                                          + "DATE : "+ singleBlog.val().date;
+                                          + "</p>  </div>"
+                                          ; 
+
+
+                           blogsHtml+="</div> <br>";
+                    
+                           blogsHtml  += "<div style= 'text-align: justify; color : black';> ";
+                           blogsHtml+= singleBlog.val().desc; 
+                      blogsHtml+="</div> <br>";
+
+
+
+
+                    blogsHtml+="</div>";
+
+                     
+                 });
+                 $("#blogs").html(blogsHtml);
+           }
+      });            
