@@ -210,6 +210,7 @@
                                  function complete(){
                                 var user= firebase.auth().currentUser;
                                 var userName = firebase.database().ref("Users/"+ user.uid).once('value').then(()=>{
+                                     console.log(fName);
                                      var fName = (snapshot.value && snapshot.value.firstName);
                                      console.log(snapshot);
                                      var sName = (snapshot.value && snapshot.value.secondName);                      
@@ -229,6 +230,7 @@
                                        "image": downloadUrl,
                                        "name": fileCompleteName,
                                         "desc": desc,
+                                        "counter": 5000- counter,
                                         "uid": user.uid,
                                          "name": userName,
                                          "time": time.toLocaleString('en-US',{hour: 'numeric', minute:'numeric',hour12: true}),
@@ -245,8 +247,12 @@
                                           else{
                                             $("#result").attr("class", "alert alert-success");
                                             $("#result").html("blog has been uploaded successfully");
-                                              window.location.href="MainPage.html";
+                                              window.open("","_self");
+
+                                                   
+
                                           }
+                                          resetForm();
                                    });
 
                                  
@@ -276,8 +282,27 @@
         //UPLOADING TO FIREBASE DATABASE AND TO STORAGE///////////////////             
 
 
+////////////////////////////////////RETRIEVE AND DISPLAY DATA FROM FIREBASE/////////////////////
+     var  dbBlogs = firebase.database().child("Blogs").orderByChild("counter");
 
-            
+      dbBlogs.on("value",(blogs)=>{
+           if(blogs.exists()){
+                 var blogsHtml = "";
+                 blogs.forEach(function(singleBlog){
+                     counter = counter+1;
+
+                      
+                     
+                 });
+           }
+      });              
+ 
+ 
+ 
+ 
+ 
+ 
+ ////////////////////////////////////RETRIEVE AND DISPLAY DATA FROM FIREBASE///////           
                             });
 
 
