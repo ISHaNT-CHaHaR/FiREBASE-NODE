@@ -186,7 +186,7 @@ if(enter){
                            var errormessage=error.message;
                            console.log(errorcode);
                            console.log(errormessage);
-                           window.alert(`Message:${errormessage}`);
+                           window.alert("message: " + errormessage);
 
                        }
                        else{
